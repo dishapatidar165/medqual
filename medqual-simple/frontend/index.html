@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedQual — Sign In</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .login-features {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .login-features p {
+            font-size: 13px;
+            color: var(--muted-foreground);
+            margin-bottom: 12px;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        .demo-accounts {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .demo-btn {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius);
+            padding: 12px 16px;
+            color: var(--foreground);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: left;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .demo-btn:hover { 
+            border-color: var(--emerald-500); 
+            background: rgba(16, 185, 129, 0.05);
+            transform: translateX(4px);
+        }
+        .role-tag {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-card fade-in-up">
+            <div class="login-logo">
+                <div class="logo-icon">⚗️</div>
+                <div class="logo-text">Med<span>Qual</span></div>
+            </div>
+
+            <h1 class="login-title">Welcome back</h1>
+            <p class="login-subtitle">Sign in to the Medicine Quality Monitoring System</p>
+
+            <!-- Error message -->
+            <div id="login-error" class="alert alert-error" style="display:none"></div>
+
+            <!-- Login Form -->
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group" style="margin-bottom:16px">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="login-email" class="form-control"
+                           placeholder="you@example.com" required autocomplete="email">
+                </div>
+
+                <div class="form-group" style="margin-bottom:24px">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="login-password" class="form-control"
+                           placeholder="••••••••" required autocomplete="current-password">
+                </div>
+
+                <button type="submit" id="login-btn" class="btn btn-primary" style="width:100%;justify-content:center">
+                    Sign In
+                </button>
+            </form>
+
+            <!-- Demo Accounts -->
+            <div class="login-features">
+                <p>DEMO ACCOUNTS (password: password123)</p>
+                <div class="demo-accounts">
+                    <button class="demo-btn" onclick="fillDemo('admin@medlab.com')">
+                        admin@medlab.com <span class="role-tag">admin</span>
+                    </button>
+                    <button class="demo-btn" onclick="fillDemo('lab@medlab.com')">
+                        lab@medlab.com <span class="role-tag">lab_staff</span>
+                    </button>
+                    <button class="demo-btn" onclick="fillDemo('viewer@medlab.com')">
+                        viewer@medlab.com <span class="role-tag">viewer</span>
+                    </button>
+                </div>
+            </div>
+
+            <p style="text-align:center;font-size:13px;color:var(--muted-foreground);margin-top:20px">
+                Don't have an account?
+                <a href="register.html" style="color:var(--emerald-500);text-decoration:none">Register here</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Redirect if already logged in
+        if (Auth.isLoggedIn()) window.location.href = 'dashboard.html';
+
+        function fillDemo(email) {
+            document.getElementById('login-email').value = email;
+            document.getElementById('login-password').value = 'password123';
+        }
+    </script>
+</body>
+</html>
